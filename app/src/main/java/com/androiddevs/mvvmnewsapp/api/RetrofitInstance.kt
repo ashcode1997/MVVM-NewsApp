@@ -1,6 +1,8 @@
 package com.androiddevs.mvvmnewsapp.api
 
+import com.androiddevs.mvvmnewsapp.MVVMNewsApp
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.BASE_URL
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,7 +15,7 @@ class RetrofitInstance {
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder()
-                .addInterceptor(logging)
+                .addInterceptor(ChuckerInterceptor(MVVMNewsApp.instance))
                 .build()
             Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
